@@ -1,17 +1,20 @@
 'use client';
 
 import { useData } from '@/context/DataContext';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { ArrowLeft, Plus, Image as ImageIcon, Edit2, Trash2 } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function NegocioAdminPage() {
   const params = useParams();
-  const { businesses, updateBusiness, news, addNews, updateNews, deleteNews, addOffer } = useData();
+  const { towns, businesses, updateBusiness, addBusiness, news, addNews, updateNews, deleteNews, addOffer } = useData();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const businessId = params.id;
+  const isNuevo = businessId === 'nuevo';
+  const townId = searchParams.get('townId');
   const business = businesses.find(b => b.id === businessId);
   const businessNews = news.filter(n => n.businessId === businessId || n.businessName === business?.name);
 
@@ -31,12 +34,52 @@ export default function NegocioAdminPage() {
   const [isAddingOffer, setIsAddingOffer] = useState(false);
   const [offerData, setOfferData] = useState(emptyOffer);
 
-  if (!business) return <div className={styles.loading}>Cargando...</div>;
+  if (!business && !isNuevo) return <div className={styles.loading}>Cargando...</div>;
+
+  const handleCreateBusiness = () => {
+    if (!formData.name || !formData.type) {
+      alert("Nombre y Tipo son obligatorios");
+      return;
+    }
+    const newId = addBusiness({
+      ...formData,
+      locationId: townId,
+      location: towns?.find(t => t.id === townId)?.name || '',
+      rating: 0,
+      reviews: 0
+    });
+    router.replace(`/admin/negocios/${newId}`);
+  };
 
   const handleSaveBusiness = () => {
-    updateBusiness(business.id, formData);
-    setIsEditing(false);
+    if (isNuevo) {
+      handleCreateBusiness();
+    } else {
+      updateBusiness(business.id, formData);
+      setIsEditing(false);
+    }
   };
+
+  if (isNuevo) {
+    return (
+      <main className={styles.main}>
+        <div className={styles.appBar}>
+          <button onClick={() => router.back()} className={styles.backBtn}>
+            <ArrowLeft size={24} />
+          </button>
+          <span className={styles.appBarTitle}>Añadir Nuevo Negocio</span>
+        </div>
+        <div className={styles.content}>
+          <div className={styles.editForm}>
+            <input value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className={styles.input} placeholder="Nombre del negocio" autoFocus />
+            <input value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})} className={styles.input} placeholder="Tipo (ej. Restaurante, Moda...)" />
+            <input value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} className={styles.input} placeholder="URL de la imagen (opcional)" />
+            <button onClick={handleSaveBusiness} className={styles.saveBtn}>Crear Negocio</button>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   const handleSaveOffer = () => {
     if (!offerData.title || !offerData.totalStock || !offerData.endDate) {
