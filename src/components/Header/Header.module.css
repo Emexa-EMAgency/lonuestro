@@ -1,0 +1,120 @@
+.header {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0; /* Fallback */
+  overflow: hidden;
+  border-bottom-left-radius: var(--radius-xl);
+  border-bottom-right-radius: var(--radius-xl);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%), 
+              url('/images/header-bg.png') center/cover no-repeat;
+  z-index: 0;
+}
+
+.topbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+}
+
+.iconButton {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-full);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.5rem;
+  margin-top: -1rem;
+}
+
+.logoContainer {
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  letter-spacing: -1px;
+  margin-bottom: 0.25rem;
+}
+
+.logoHeart {
+  width: 32px;
+  height: 32px;
+  margin: 0 2px;
+  margin-top: 4px;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-style: italic; /* Mimicking the handwritten style loosely, can add a script font later if needed */
+  opacity: 0.9;
+}
+
+.locationSelector {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  gap: 0.5rem;
+  width: fit-content;
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.locationSelector:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.locationIcon {
+  color: var(--color-primary);
+}
+
+.locationText {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.locationChevron {
+  color: var(--color-text-muted);
+}

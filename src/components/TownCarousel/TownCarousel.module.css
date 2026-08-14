@@ -1,0 +1,132 @@
+.container {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.viewAllBtn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.carouselWrapper {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  -webkit-overflow-scrolling: touch; /* Mobile scrolling smooth */
+}
+
+.carouselWrapper::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.carousel {
+  display: flex;
+  gap: 1rem;
+  padding: 0 1.5rem 1rem 1.5rem;
+  width: max-content;
+}
+
+.card {
+  width: 140px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card.selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(17, 94, 46, 0.15);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 90px;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkIcon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.cardInfo {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-surface);
+}
+
+.townName {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  text-align: center;
+  /* Truncate if long */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.businessCount {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.smallIcon {
+  color: var(--color-primary);
+}
